@@ -1,0 +1,121 @@
+.new-todo {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  font-size: 24px;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: 1.4em;
+  color: inherit;
+  padding: 6px;
+  border: 1px solid #999;
+  box-shadow: inset 0 -1px 5px #0003;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.new-todo {
+  padding: 16px 16px 16px 60px;
+  height: 65px;
+  border: none;
+  background: rgba(0, 0, 0, 0.003);
+  box-shadow: inset 0 -2px 1px #00000008;
+}
+
+.new-todo:focus {
+  outline: none;
+  box-shadow: 0 0 2px 2px #cf7d7d;
+}
+
+.todoapp {
+  width: 550px;
+  background: #fff;
+  position: absolute;
+  top: 135px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  box-shadow: 0 2px 4px #0003, 0 25px 50px #0000001a;
+}
+
+.todoapp input::-webkit-input-placeholder {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  color: #0006;
+}
+
+.todoapp input::-moz-placeholder {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  color: #0006;
+}
+
+.todoapp input::input-placeholder {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  color: #0006;
+}
+
+.article {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  width: 100%;
+
+  font-size: 80px;
+  font-weight: 200;
+  text-align: center;
+  color: #b83f45;
+  -webkit-text-rendering: optimizeLegibility;
+  -moz-text-rendering: optimizeLegibility;
+  text-rendering: optimizeLegibility;
+}
+
+/* .toggle-all {
+
+} */
+
+.toggle-all-label {
+  pointer-events: none;
+}
+
+.toggle-all {
+  width: 37px !important;
+  height: 60px !important;
+
+  /* left: 5px; */
+  background-color: #b83f45;
+
+  border: none;
+  opacity: 0;
+  position: absolute;
+
+  z-index: 100;
+}
+
+.toggle-all + label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 65px;
+  font-size: 0;
+  position: absolute;
+  left: 2px;
+}
+
+.toggle-all + label:before {
+  content: "\276f";
+  display: inline-block;
+  font-size: 22px;
+  color: #949494;
+  padding: 10px 27px;
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.toggle-all:active + label:before {
+  color: #484848;
+  box-shadow: 0 0 2px 2px #cf7d7d;
+}

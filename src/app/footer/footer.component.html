@@ -1,0 +1,32 @@
+<footer>
+  <section class="footer">
+    <span class="text"
+      >{{ textFill(todoService.toDoList)[0] }}
+      {{ textFill(todoService.toDoList)[1] }} left</span
+    >
+    <ul class="filters">
+      <li>
+        <a [routerLink]="['/']" (click)="todoService.filterTodos('All')">All</a>
+      </li>
+      <li>
+        <a [routerLink]="['active']" (click)="todoService.filterTodos('Active')"
+          >Active</a
+        >
+      </li>
+      <li>
+        <a
+          [routerLink]="['/completed']"
+          (click)="todoService.filterTodos('Completed')"
+          >Complete</a
+        >
+      </li>
+    </ul>
+    <button
+      *ngIf="todoService.anyCompleted"
+      (click)="todoService.clearToDo()"
+      class="clear-completed"
+    >
+      Clear completed
+    </button>
+  </section>
+</footer>

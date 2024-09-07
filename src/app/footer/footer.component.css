@@ -36,9 +36,10 @@
   border-color: #db7676;
 }
 
-.filters li a.selected {
+/* .filters li a.selected {
+  border: 2px;
   border-color: #ce4646;
-}
+} */
 
 .clear-completed,
 .clear-completed:active {
@@ -60,4 +61,8 @@
 .clear-completed {
   font-size: 16px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.active-link {
+  background-color: #ffc3c3;
 }

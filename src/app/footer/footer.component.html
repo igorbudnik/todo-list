@@ -6,10 +6,20 @@
     >
     <ul class="filters">
       <li>
-        <a [routerLink]="['/']" (click)="todoService.filterTodos('All')">All</a>
+        <a
+          [routerLink]="['/']"
+          (click)="todoService.filterTodos('All')"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >All</a
+        >
       </li>
       <li>
-        <a [routerLink]="['active']" (click)="todoService.filterTodos('Active')"
+        <a
+          [routerLink]="['/active']"
+          (click)="todoService.filterTodos('Active')"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
           >Active</a
         >
       </li>
@@ -17,6 +27,8 @@
         <a
           [routerLink]="['/completed']"
           (click)="todoService.filterTodos('Completed')"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
           >Complete</a
         >
       </li>

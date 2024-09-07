@@ -28,5 +28,5 @@
     ></app-list-todo>
   </ul>
 
-  <app-footer *ngIf="todoService.toDoList"></app-footer>
+  <app-footer *ngIf="todoService.toDoList.length !== 0"></app-footer>
 </div>

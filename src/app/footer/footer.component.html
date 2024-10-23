@@ -1,0 +1,48 @@
+<footer>
+  <section class="footer">
+    <span class="text"
+      >{{ getTodoCountInfo(todoService.todo$.value)[0] }}
+      {{ getTodoCountInfo(todoService.todo$.value)[1] }} left</span
+    >
+    <ul class="filters">
+      <li>
+        <a
+          [routerLink]="['/']"
+          [queryParams]="[{ state: 'All' }]"
+          (click)="onChangeFilter('All')"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >All</a
+        >
+      </li>
+      <li>
+        <a
+          [routerLink]="['/active']"
+          [queryParams]="[{ state: 'Active' }]"
+          (click)="onChangeFilter('Active')"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Active</a
+        >
+      </li>
+      <li>
+        <a
+          [routerLink]="['/completed']"
+          [queryParams]="[{ state: 'Сompleted' }]"
+          (click)="onChangeFilter('Completed')"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Complete</a
+        >
+      </li>
+    </ul>
+    <button
+      [routerLink]="['/']"
+      *ngIf="todoService.VisibilityChange | async"
+      (click)="onClearEveryTodos()"
+      class="clear-completed"
+    >
+      Clear completed
+    </button>
+  </section>
+</footer>

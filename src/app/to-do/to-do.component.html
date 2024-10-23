@@ -1,0 +1,29 @@
+<h1 class="article">Todos</h1>
+
+<div class="todoapp">
+  <div
+    *ngIf="(todoService.todo$ | async)?.length !== 0"
+    class="container-input"
+  >
+    <input
+      type="checkbox"
+      class="toggle-all"
+      (change)="onCheckAllTodos()"
+    /><label htmlfor="toggle-all" class="toggle-all-label"></label>
+  </div>
+  <form [formGroup]="applyForm" (submit)="onSubmitForm()">
+    <input
+      class="new-todo ng-pristine ng-valid ng-touched"
+      placeholder="What needs to be done?"
+      formControlName="newToDo"
+    />
+  </form>
+  <ul *ngIf="(todoService.todo$ | async)?.length !== 0">
+    <app-list-todo
+      *ngFor="let toDo of filteredTodo$ | async"
+      [toDo]="toDo"
+    ></app-list-todo>
+  </ul>
+
+  <app-footer *ngIf="(todoService.todo$ | async)?.length !== 0"></app-footer>
+</div>

@@ -1,0 +1,35 @@
+<section class="info">
+  <li class="todo-item">
+    <div class="item-name">
+      <label *ngIf="!focused" class="switch">
+        <input
+          (change)="onCheckTask(toDo.id)"
+          [checked]="toDo.checked"
+          type="checkbox"
+        />
+        <span class="slider round"></span>
+      </label>
+
+      <form
+        action="submit"
+        [formGroup]="editForm"
+        (submit)="onEditTask(toDo.id, editForm.value.editToDo!)"
+      >
+        <input
+          type="text"
+          #search
+          (keyup.enter)="onSubmitChanges()"
+          (focusout)="onCancelChanges(toDo.id)"
+          (focus)="onFocus()"
+          class="edit"
+          formControlName="editToDo"
+        />
+      </form>
+    </div>
+    <button
+      *ngIf="!focused"
+      (click)="onClickDelete(toDo.id)"
+      class="button-delete"
+    ></button>
+  </li>
+</section>

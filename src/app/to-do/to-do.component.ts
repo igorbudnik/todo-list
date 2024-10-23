@@ -1,31 +1,50 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { FormControl, FormGroup } from '@angular/forms';
 import { ToDoService } from '../to-do.service';
-import { map, Observable, Subscription } from 'rxjs';
-import { ITodo } from '../todo';
+import { combineLatest, map } from 'rxjs';
 
 @Component({
+  providers: [],
   selector: 'app-todo',
   templateUrl: './to-do.component.html',
   styleUrls: ['./to-do.component.css'],
 })
-export class ToDoComponent implements OnInit {
-  todoService: ToDoService = inject(ToDoService);
+export class ToDoComponent {
   hideFooter: boolean = true;
+
+  constructor(public todoService: ToDoService) {}
 
   applyForm = new FormGroup({
     newToDo: new FormControl(''),
   });
 
-  submit() {
+  filteredTodo$ = combineLatest([
+    this.todoService.chosenFilter,
+    this.todoService.todo$,
+  ]).pipe(
+    map(([filter, todos]) => {
+      switch (filter) {
+        case 'Active':
+          return todos.filter((item) => !item.checked);
+        case 'Completed':
+          return todos.filter((item) => item.checked);
+        default:
+          return todos;
+      }
+    })
+  );
+
+  onCheckAllTodos(): void {
+    this.todoService.checkAll();
+    this.todoService.isAnyCheckedTodos();
+  }
+
+  onSubmitForm(): void {
     if (!this.applyForm.value.newToDo) {
       return;
     }
     this.todoService.addTodo(this.applyForm.value.newToDo!);
     this.applyForm.reset();
-  }
-  ngOnInit() {
-    console.log(this.todoService.filter);
   }
 }

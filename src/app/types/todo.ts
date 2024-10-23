@@ -3,3 +3,5 @@ export interface ITodo {
   text: string;
   checked: boolean;
 }
+
+export type IFilter = 'All' | 'Active' | 'Completed';

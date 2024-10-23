@@ -3,7 +3,7 @@
     <div class="item-name">
       <label *ngIf="!focused" class="switch">
         <input
-          (change)="todoService.makeChecked(toDo.id)"
+          (change)="onCheckTask(toDo.id)"
           [checked]="toDo.checked"
           type="checkbox"
         />
@@ -13,14 +13,14 @@
       <form
         action="submit"
         [formGroup]="editForm"
-        (submit)="todoService.editTodo(toDo.id, editForm.value.editToDo!)"
+        (submit)="onEditTask(toDo.id, editForm.value.editToDo!)"
       >
         <input
           type="text"
           #search
-          (keyup.enter)="submitChanges()"
-          (focusout)="cancelChanges(toDo.id)"
-          (focus)="focus()"
+          (keyup.enter)="onSubmitChanges()"
+          (focusout)="onCancelChanges(toDo.id)"
+          (focus)="onFocus()"
           class="edit"
           formControlName="editToDo"
         />
@@ -28,7 +28,7 @@
     </div>
     <button
       *ngIf="!focused"
-      (click)="todoService.deteleToDo(toDo.id)"
+      (click)="onClickDelete(toDo.id)"
       class="button-delete"
     ></button>
   </li>

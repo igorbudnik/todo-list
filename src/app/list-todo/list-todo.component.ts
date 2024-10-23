@@ -1,5 +1,5 @@
-import { Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
-import { ITodo } from '../todo';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { ITodo } from '../types/todo';
 import { ToDoService } from '../to-do.service';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -11,35 +11,46 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class ListComponent {
   @Input() toDo!: ITodo;
   @ViewChild('search') search!: ElementRef;
-  focused: boolean;
-  todoService: ToDoService = inject(ToDoService);
+  focused: boolean = false;
   editForm = new FormGroup({
     editToDo: new FormControl(''),
   });
 
-  submitChanges(): void {
+  constructor(private todoService: ToDoService) {}
+
+  onSubmitChanges(): void {
     this.search.nativeElement.blur();
     this.focused = false;
   }
 
-  cancelChanges(id: string): void {
+  onCancelChanges(id: string): void {
     this.focused = false;
     this.editForm.controls['editToDo'].setValue(
-      this.todoService.toDoList.filter((item) => item.id === id)[0].text
+      this.todoService.todo$.value.filter((item) => item.id === id)[0].text
     );
   }
 
-  focus(): void {
+  onCheckTask(id: string): void {
+    this.todoService.makeChecked(id);
+
+    this.todoService.isAnyCheckedTodos();
+  }
+
+  onFocus(): void {
     this.focused = true;
   }
 
-  constructor() {
-    this.focused = false;
+  onClickDelete(id: string): void {
+    this.todoService.deteleToDo(id);
+  }
+
+  onEditTask(id: string, formValue: string): void {
+    this.todoService.editTodo(id, formValue);
   }
 
   ngOnInit(): void {
     this.editForm.controls['editToDo'].setValue(
-      this.todoService.toDoList.filter((item) => item.id === this.toDo.id)[0]
+      this.todoService.todo$.value.filter((item) => item.id === this.toDo.id)[0]
         .text
     );
   }

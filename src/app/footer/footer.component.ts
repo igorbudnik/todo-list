@@ -1,6 +1,6 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ToDoService } from '../to-do.service';
-import { ITodo } from '../todo';
+import { IFilter, ITodo } from '../types/todo';
 
 @Component({
   selector: 'app-footer',
@@ -10,11 +10,18 @@ import { ITodo } from '../todo';
 export class FooterComponent {
   todoService: ToDoService = inject(ToDoService);
 
-  textFill(list: ITodo[]) {
-    const amount: number = list.filter((item) => !item.checked).length;
-    const items: string = amount > 1 ? 'items' : 'item';
-    return [amount, items];
+  onChangeFilter(filter: IFilter): void {
+    this.todoService.chosenFilter.next(filter);
   }
 
-  constructor() {}
+  onClearEveryTodos(): void {
+    this.todoService.clearToDo();
+    this.todoService.VisibilityChange.next(false);
+  }
+
+  getTodoCountInfo(list: ITodo[]): [amount: number, items: string] {
+    const amount = list.filter((item) => !item.checked).length;
+    const items = amount > 1 ? 'items' : 'item';
+    return [amount, items];
+  }
 }
